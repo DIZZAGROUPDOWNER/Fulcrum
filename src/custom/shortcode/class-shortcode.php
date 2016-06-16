@@ -86,11 +86,33 @@ class Shortcode implements Shortcode_Contract {
 	 * @return string Shortcode HTML
 	 */
 	protected function render() {
+		$content = $this->get_content();
 
 		ob_start();
 		include( $this->config->view );
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Get the content.  This method processes the content by passing it
+	 * through the shortcode function and escaping through `wp_kses_post`.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string
+	 */
+	protected function get_content() {
+		if ( ! $this->content ) {
+			return '';
+		}
+
+		$content = do_shortcode( $this->content );
+
+		$filter  = $this->config->has( 'content_filter' ) ? $this->config->content_filter : 'wp_kses_post';
+		$content = $filter( $content );
+
+		return $content;
 	}
 
 	/**
