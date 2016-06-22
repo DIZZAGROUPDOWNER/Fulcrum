@@ -1,4 +1,5 @@
-<?php namespace Fulcrum\Tests\Helpers;
+<?php 
+namespace Fulcrum\Tests\Helpers;
 
 use WP_UnitTestCase;
 use ArrayAccess;

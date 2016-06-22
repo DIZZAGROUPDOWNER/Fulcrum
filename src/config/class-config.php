@@ -123,7 +123,7 @@ class Config extends ArrayObject implements Config_Contract {
 	 * @return bool
 	 */
 	public function has( $parameter_key ) {
-		return Arr_Helpers::has( $this->config, $parameter_key );
+		return Arr_Helpers::has( $this->config, $parameter_key, true );
 	}
 
 	/**
@@ -156,7 +156,9 @@ class Config extends ArrayObject implements Config_Contract {
 	}
 
 	/**
-	 * Valid the Config.
+	 * Checks if the config is valid.
+	 *
+	 * FUTURE FEATURE
 	 *
 	 * @since 1.0.0
 	 *
@@ -168,6 +170,19 @@ class Config extends ArrayObject implements Config_Contract {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Set a configuration in via the key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $parameter_key Key to be assigned, which also becomes the property
+	 * @param mixed $value Value to be assigned to the parameter key
+	 * @return null
+	 */
+	public function set( $parameter_key, $value ) {
+		$this->push( $parameter_key, $value );
 	}
 
 	/**

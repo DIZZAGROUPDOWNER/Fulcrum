@@ -1,3 +1,8 @@
+## 1.1.1
+
+- Adding tests
+- README.md instructions
+
 ## 1.1.0
 - Giving themes love too by adding a Theme Addon module.  Now you pass the initialization and setup
 configuration from the theme to Fulcrum and it handles the setup for you.

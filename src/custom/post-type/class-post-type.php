@@ -259,13 +259,10 @@ class Post_Type implements Post_Type_Contract {
 			$this->config->add_feed = false;
 		}
 
-		$this->_are_labels_configured = $this->config->is_array( 'args' ) && $this->config->is_array( 'args.labels' );
-
-		$this->_is_columns_data_configured = $this->config->is_array( 'columns_data' );
-
+		$this->_are_labels_configured          = $this->config->is_array( 'args' ) && $this->config->is_array( 'args.labels' );
+		$this->_is_columns_data_configured     = $this->config->is_array( 'columns_data' );
 		$this->_is_sortable_columns_configured = $this->config->is_array( 'sortable_columns' );
-
-		$this->_is_sort_columns_by_configured = $this->config->is_array( 'sort_columns_by' );
+		$this->_is_sort_columns_by_configured  = $this->config->is_array( 'sort_columns_by' );
 	}
 
 	/*****************************************************

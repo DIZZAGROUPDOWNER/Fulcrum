@@ -204,7 +204,7 @@ class Arr {
 			return true;
 		}
 
-		return false === self::dot_notation_walk( $array, $key, 'callback_has' ) ? false : true;
+		return ( false !== self::dot_notation_walk( $array, $key, 'callback_has' ) );
 	}
 
 	/**

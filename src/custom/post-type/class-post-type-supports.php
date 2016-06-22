@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Post Type Class functions
- *
- * This class handles a custom post type object.
+ * Post Type Supports Class functions
  *
  * @package     Fulcrum\Custom\Post_Type
  * @since       1.0.0
