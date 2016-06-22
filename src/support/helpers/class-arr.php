@@ -1,14 +1,14 @@
-<?php namespace Fulcrum\Support\Helpers;
+<?php 
 
-	/**
-	 * Array Helpers - Static Collection of Helpers for Data Type Array
-	 *
-	 * @package     Fulcrum\Support\Helpers
-	 * @since       1.0.0
-	 * @author      hellofromTonya
-	 * @link        http://hellofromtonya.com
-	 * @license     GNU General Public License 2.0+ and MIT License (MIT)
-	 */
+/**
+ * Array Helpers - Static Collection of Helpers for Data Type Array
+ *
+ * @package     Fulcrum\Support\Helpers
+ * @since       1.0.0
+ * @author      hellofromTonya
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+ and MIT License (MIT)
+ */
 
 /**
  * This class has been adapted from the Laravel Illuminate framework, which
@@ -16,6 +16,7 @@
  * Changes reflect WordPress coding standard, compliance with PHP 5.3, +
  * additional functionality.
  */
+namespace Fulcrum\Support\Helpers;
 
 use Closure;
 

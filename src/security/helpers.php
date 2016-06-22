@@ -5,8 +5,8 @@
  * @package     Fulcrum
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.com
- * @license     GNU General Public License 2.0+
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+
  */
 
 if ( ! function_exists( 'fulcrum_load_login_form_styling' ) ) {

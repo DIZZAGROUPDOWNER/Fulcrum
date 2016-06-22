@@ -6,8 +6,8 @@
  * @package     Fulcrum
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.com
- * @license     GNU General Public License 2.0+ and MIT Licence (MIT)
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+ and MIT Licence (MIT)
  */
 
 /**

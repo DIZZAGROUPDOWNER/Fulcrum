@@ -6,14 +6,12 @@
  * Adds metabox(es) to the Genesis Theme Settings Admin Page
  *
  * @package     Fulcrum\Custom\Setting
- * @since       1.0.0
+ * @since       1.1.1
  * @author      hellofromTonya
- * @link        http://hellofromtonya.com
- * @license     GNU General Public License 2.0+
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+
  */
 namespace Fulcrum\Custom\Setting;
-
-use Fulcrum\Config\Config_Contract;
 
 class Genesis_Theme_Settings extends Setting {
 

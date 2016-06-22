@@ -5,13 +5,13 @@
  * @package         Fulcrum
  * @author          hellofromTonya
  * @license         GPL-2.0+
- * @link            http://hellofromtonya.com
+ * @link            hhttp://hellofromtonya.github.io/Fulcrum/
  *
  * @wordpress-plugin
  * Plugin Name:     Fulcrum Plugin
- * Plugin URI:      http://hellofromtonya.com
+ * Plugin URI:      http://hellofromtonya.github.io/Fulcrum/
  * Description:     Fulcrum - The customization central repository to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.
- * Version:         1.1.0
+ * Version:         1.1.1
  * Author:          hellofromTonya
  * Author URI:      http://hellofromtonya.com
  * Text Domain:     fulcrum

@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Database helpers
  *
  * @package     Fulcrum\Support\Helpers
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.com
- * @license     GNU General Public License 2.0+
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+
  */
 namespace Fulcrum\Support\Helpers;
 

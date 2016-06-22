@@ -8,8 +8,8 @@
  * @package     Fulcrum\Custom\Template
  * @since       1.0.3
  * @author      hellofromTonya and Tom McFarlin
- * @link        http://hellofromtonya.com
- * @license     GNU General Public License 2.0+
+ * @link        http://hellofromtonya.github.io/Fulcrum/
+ * @license     GPL-2.0+
  */
 
 namespace Fulcrum\Custom\Template;
