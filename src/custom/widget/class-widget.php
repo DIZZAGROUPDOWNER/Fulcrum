@@ -50,7 +50,7 @@ abstract class Widget extends WP_Widget implements Widget_Contract {
 	 *
 	 * @since 1.1.1
 	 *
-	 * @return self
+	 * @return Widget
 	 */
 	public function __construct() {
 		$this->init_properties();
@@ -83,7 +83,7 @@ abstract class Widget extends WP_Widget implements Widget_Contract {
 	 * @throws RuntimeException
 	 */
 	protected function init_properties() {
-		$this->fulcrum           = Fulcrum::getFulcrum();
+		$this->fulcrum        = Fulcrum::getFulcrum();
 		$widget_container_key = get_class( $this );
 
 		if ( ! $this->fulcrum->has( $widget_container_key ) ) {
@@ -100,7 +100,9 @@ abstract class Widget extends WP_Widget implements Widget_Contract {
 	 *
 	 * @@return null
 	 */
-	protected function init() { /* do nothing */ }
+	protected function init() {
+		/* do nothing */
+	}
 
 	/****************************
 	 * Render to Front-end
