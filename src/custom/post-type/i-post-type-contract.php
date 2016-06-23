@@ -75,17 +75,6 @@ interface Post_Type_Contract {
 	public function sort_columns_by( $vars );
 
 	/**
-	 * Handles adding (or removing) this CPT to/from the RSS Feed
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars Query variables from parse_request
-	 *
-	 * @return array    $query_vars
-	 */
-	public function add_or_remove_to_from_rss_feed( $query_vars );
-
-	/**
 	 * Get all of the supports
 	 *
 	 * @since 1.0.0

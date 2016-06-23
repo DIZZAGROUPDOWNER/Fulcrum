@@ -34,18 +34,18 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	const MIN_WP_VERSION = '3.5';
 
 	/**
-	 * Configuration parameters
-	 *
-	 * @var Config_Contract
-	 */
-	protected $config;
-
-	/**
 	 * Instance of Fulcrum
 	 *
 	 * @var Fulcrum_Contract
 	 */
 	public static $fulcrum;
+
+	/**
+	 * Configuration parameters
+	 *
+	 * @var Config_Contract
+	 */
+	protected $config;
 
 	/*************************
 	 * Getters
@@ -76,7 +76,7 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	 */
 	public function __construct( Config_Contract $config ) {
 		$this->config = $config;
-		parent::__construct();
+		parent::__construct( $this->config->initial_parameters );
 
 		$this['fulcrum']                         = self::$fulcrum = $this;
 		$this['is_flush_rewrite_rules_required'] = false;

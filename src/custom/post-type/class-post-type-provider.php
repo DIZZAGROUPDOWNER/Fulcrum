@@ -28,7 +28,7 @@ class Post_Type_Provider extends Provider {
 	/**
 	 * Get the concrete based upon the configuration supplied.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.1
 	 *
 	 * @param array $config Runtime configuration parameters.
 	 * @param string $unique_id Container's unique key ID for this instance.
@@ -39,18 +39,42 @@ class Post_Type_Provider extends Provider {
 
 		$service_provider = array(
 			'autoload' => $config['autoload'],
-			'concrete' => function ( $container ) use ( $config ) {
+			'concrete' => function ( $container ) use ( $config, $unique_id ) {
 				$config_obj = $this->instantiate_config( $config );
 
-				return new Post_Type(
+				if ( ! $this->is_post_type_config_valid( $config_obj, $config['post_type_name'] ) ) {
+					return;
+				}
+
+				$post_type = new Post_Type(
 					$config_obj,
 					$config['post_type_name'],
 					new Post_Type_Supports( $config_obj )
 				);
+
+				$container[ $unique_id . '_feed' ] = new Feed( $config_obj, $config['post_type_name'] );
+
+				return $post_type;
 			},
 		);
 
 		return $service_provider;
+	}
+
+	/**
+	 * Checks if the post type's configuration is valid by running it through the validator.
+	 *
+	 * @since 1.1.1
+	 *
+	 * @param $config
+	 * @param $post_type
+	 *
+	 * @return bool
+	 */
+	protected function is_post_type_config_valid( $config, $post_type ) {
+		$validator = new Validator();
+
+		return $validator->is_valid( $config, $post_type );
 	}
 
 	/**

@@ -1,6 +1,7 @@
 ## 1.1.1
 
-- Adding tests
+- Split out starting object validation into a Validator class
+- Split the feed out of the custom post type to stand on its own, as it's a separate feature and functionality.
 - README.md instructions
 
 ## 1.1.0

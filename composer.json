@@ -47,6 +47,8 @@
             "src/custom/meta/i-metabox-contract.php",
 
             "src/custom/post-type/class-post-type.php",
+            "src/custom/post-type/class-feed.php",
+            "src/custom/post-type/class-validator.php",
             "src/custom/post-type/class-post-type-supports.php",
             "src/custom/post-type/class-post-type-provider.php",
             "src/custom/post-type/i-post-type-contract.php",
@@ -56,6 +58,7 @@
             "src/custom/post-type/permalink/class-post-name-slug.php",
 
             "src/custom/shortcode/class-shortcode.php",
+            "src/custom/shortcode/class-validator.php",
             "src/custom/shortcode/class-shortcode-provider.php",
             "src/custom/shortcode/i-shortcode-contract.php",
 

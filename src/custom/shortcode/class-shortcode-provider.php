@@ -22,7 +22,7 @@ class Shortcode_Provider extends Provider {
 	 *
 	 * @var bool
 	 */
-	protected $has_defaults = false;
+	protected $has_defaults = true;
 
 	/**
 	 * Flag to indicate whether to skip the queue and register directly into the Container.
@@ -57,9 +57,11 @@ class Shortcode_Provider extends Provider {
 		$service_provider = array(
 			'autoload' => $config['autoload'],
 			'concrete' => function ( $container ) use ( $config ) {
+				
 				return new $config['classname'](
 					new Config(
-						$config['config']
+						$config['config'],
+						new Config_Validator()
 					)
 				);
 			},

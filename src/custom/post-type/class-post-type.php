@@ -70,13 +70,6 @@ class Post_Type implements Post_Type_Contract {
 	 */
 	private $_is_sort_columns_by_configured = false;
 
-	/**
-	 * Internal flag if the query_vars has a post_type key
-	 *
-	 * @var bool
-	 */
-	protected $query_vars_has_post_types = false;
-
 	/****************************
 	 * Instantiate & Initialize
 	 ***************************/
@@ -87,7 +80,7 @@ class Post_Type implements Post_Type_Contract {
 	 * @since 1.0.0
 	 *
 	 * @param Config_Contract $config Runtime configuration parameters.
-	 * @param string $post_type_name Post type name (all lowercase & no spaces)
+	 * @param string $post_type_name Name of this post type
 	 * @param Post_Type_Supports $supports Instance of the post type supports handler
 	 *
 	 * @throws InvalidArgumentException
@@ -97,10 +90,8 @@ class Post_Type implements Post_Type_Contract {
 		$this->post_type = $post_type_name;
 		$this->supports  = $supports;
 
-		if ( $this->is_starting_state_valid() ) {
-			$this->init_config();
-			$this->init_events();
-		}
+		$this->init_config();
+		$this->init_events();
 	}
 
 	/**
@@ -134,8 +125,6 @@ class Post_Type implements Post_Type_Contract {
 		$this->add_column_data();
 
 		$this->init_sorting();
-
-		add_filter( 'request', array( $this, 'add_or_remove_to_from_rss_feed' ) );
 	}
 
 	/*****************************************************
@@ -217,192 +206,17 @@ class Post_Type implements Post_Type_Contract {
 	 ***************************************************/
 
 	/**
-	 * Checks if the starting state is valid
-	 *
-	 * @since 1.0.0
-	 *
-	 * @throws InvalidArgumentException
-	 * @return bool
-	 */
-	protected function is_starting_state_valid() {
-		if ( ! $this->post_type ) {
-			throw new InvalidArgumentException( __( 'For Custom Post Type Configuration, the Post type cannot be empty', 'fulcrum' ) );
-		}
-
-		if ( ! $this->is_configuration_valid() ) {
-			throw new InvalidArgumentException( sprintf( __( 'For Custom Post Type Configuration, the config for [%s] cannot be empty.', 'fulcrum' ), $this->post_type ) );
-		}
-
-		return true;
-	}
-
-	/**
-	 * Checks if $config is valid
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool
-	 */
-	protected function is_configuration_valid() {
-		return ! empty( $this->config->all() );
-	}
-
-	/**
 	 * Initialized Config
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.1
 	 *
 	 * @return null
 	 */
 	protected function init_config() {
-		if ( ! $this->config->has( 'add_feed' ) || ! isset( $this->config->add_feed ) || true !== $this->config->add_feed ) {
-			$this->config->add_feed = false;
-		}
-
 		$this->_are_labels_configured          = $this->config->is_array( 'args' ) && $this->config->is_array( 'args.labels' );
 		$this->_is_columns_data_configured     = $this->config->is_array( 'columns_data' );
 		$this->_is_sortable_columns_configured = $this->config->is_array( 'sortable_columns' );
 		$this->_is_sort_columns_by_configured  = $this->config->is_array( 'sort_columns_by' );
-	}
-
-	/*****************************************************
-	 * Feed Methods
-	 ***************************************************/
-
-	/**
-	 * Handles adding (or removing) this CPT to/from the RSS Feed
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars Query variables from parse_request
-	 *
-	 * @return array $query_vars
-	 */
-	public function add_or_remove_to_from_rss_feed( $query_vars ) {
-		if ( ! isset( $query_vars['feed'] ) ) {
-			return $query_vars;
-		}
-
-		$this->add_or_remove_post_type_tofrom_feed_handler( $query_vars );
-
-		return $query_vars;
-	}
-
-	/**
-	 * Checks whether to add or remove the post type from feed. If yes,
-	 * then it either adds or removes it.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars
-	 */
-	protected function add_or_remove_post_type_tofrom_feed_handler( &$query_vars ) {
-		$post_type_index = false;
-
-		if ( ! $this->is_post_type_in_query_var( $query_vars ) && $this->query_vars_has_post_types ) {
-			$post_type_index = array_search( $this->post_type, (array) $query_vars['post_type'] );
-		}
-
-		if ( $this->is_set_to_add_to_feed( $post_type_index ) ) {
-			return $this->add_post_type_to_feed( $query_vars );
-		}
-
-		if ( $this->is_set_to_remove_from_feed( $post_type_index ) ) {
-			return $this->remove_post_type_from_feed( $query_vars, $post_type_index );
-		}
-	}
-
-	/**
-	 * Add post type to the feed.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars
-	 *
-	 * @return void
-	 */
-	protected function add_post_type_to_feed( array &$query_vars ) {
-		if ( ! $this->query_vars_has_post_types ) {
-			$query_vars['post_type'] = array( 'post', $this->post_type );
-		} else {
-			$query_vars['post_type'][] = $this->post_type;
-		}
-	}
-
-	/**
-	 * Remove the post type from the feed.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars
-	 * @param bool|int $post_type_index
-	 *
-	 * @return void
-	 */
-	protected function remove_post_type_from_feed( array &$query_vars, $post_type_index ) {
-		unset( $query_vars['post_type'][ $post_type_index ] );
-
-		$query_vars['post_type'] = array_values( $query_vars['post_type'] );
-	}
-
-	/**
-	 * Checks if this post type is in the `$query_vars['post_type']`.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars
-	 *
-	 * @return bool
-	 */
-	protected function is_post_type_in_query_var( array $query_vars ) {
-		if ( ! $this->does_query_vars_have_post_types( $query_vars ) ) {
-			return false;
-		}
-
-		return in_array( $this->post_type, (array) $query_vars['post_type'] );
-	}
-
-	/**
-	 * Checks if the query_vars already has `post_type` key and it is an array.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $query_vars
-	 *
-	 * @return bool
-	 */
-	public function does_query_vars_have_post_types( array $query_vars ) {
-		$this->query_vars_has_post_types = array_key_exists( 'post_type', $query_vars ) && is_array( $query_vars['post_type'] );
-
-		return $this->query_vars_has_post_types;
-	}
-
-	/**
-	 * Checks if conditions are set to add the custom post type from the feed.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool|int $index
-	 *
-	 * @return bool
-	 */
-	protected function is_set_to_add_to_feed( $index ) {
-		return false === $index && $this->config->add_feed;
-	}
-
-	/**
-	 * Checks if conditions are set to remove the custom post type from the feed.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param bool|int $index
-	 *
-	 * @return bool
-	 */
-	protected function is_set_to_remove_from_feed( $index ) {
-		return $this->query_vars_has_post_types &&
-		       false !== $index &&
-		       ! $this->config->add_feed;
 	}
 
 	/*****************************************************

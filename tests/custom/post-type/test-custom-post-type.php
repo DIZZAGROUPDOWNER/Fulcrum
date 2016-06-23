@@ -2,6 +2,7 @@
 namespace Fulcrum\Tests\Custom\Post_Type;
 
 use Fulcrum\Custom\Post_Type\Post_Type_Supports;
+use Fulcrum\Custom\Post_Type\Validator;
 use WP_UnitTestCase;
 use Fulcrum\Tests\Mocks\Empty_Config;
 use Fulcrum\Config\Factory;
@@ -12,6 +13,7 @@ include_once FULCRUM_MOCKS_DIR . 'mock-empty-config.php';
 class Post_Type_Test extends WP_UnitTestCase {
 
 	protected $post_type = 'foo';
+	protected $config_array = array();
 	protected $cpt;
 	protected $config;
 	protected $supports;
@@ -19,8 +21,9 @@ class Post_Type_Test extends WP_UnitTestCase {
 	function setUp() {
 		parent::setUp();
 
-		$this->config   = Factory::create( FULCRUM_CONFIGS_DIR . 'cpt-foo.php' );
-		$this->supports = new Post_Type_Supports( $this->config );
+		$this->config_array = include( __DIR__ . '/config.php' );
+		$this->config       = Factory::create( $this->config_array );
+		$this->supports     = new Post_Type_Supports( $this->config );
 	}
 
 	function tearDown() {
@@ -33,23 +36,6 @@ class Post_Type_Test extends WP_UnitTestCase {
 		$this->cpt = new Post_Type( $this->config, $this->post_type, $this->supports );
 
 		$this->cpt->register();
-	}
-
-	function test_exception_thrown_for_no_post_type() {
-		$post_type = '';
-		$this->setExpectedException( 'InvalidArgumentException', 'For Custom Post Type Configuration, the Post type cannot be empty' );
-
-		new Post_Type( $this->config, $post_type, $this->supports );
-
-		$this->assertFalse( post_type_exists( 'foo' ) );
-	}
-
-	function test_exception_thrown_for_invalid_config() {
-		$post_type = 'foo';
-		$this->setExpectedException( 'InvalidArgumentException', 'For Custom Post Type Configuration, the config for [foo] cannot be empty.' );
-		new Post_Type( new Empty_Config, $post_type, $this->supports );
-
-		$this->assertFalse( post_type_exists( 'foo' ) );
 	}
 
 	function test_registering() {
@@ -132,45 +118,5 @@ class Post_Type_Test extends WP_UnitTestCase {
 
 	public function callback_test_columns_data_and_callback( $post_id, $data ) {
 		return $post_id . ', ' . $data;
-	}
-
-	function test_add_to_feed() {
-		$qv_mock = array(
-			'feed'      => '',
-			'post_type' => get_post_types(),
-		);
-
-		$this->config->push( 'add_feed', true );
-
-		$this->init_cpt( true );
-
-		$qv = $this->cpt->add_or_remove_to_from_rss_feed( $qv_mock );
-		$this->assertTrue( in_array( 'foo', $qv['post_type'] ) );
-	}
-
-	function test_add_to_feed_when_no_post_types_in_feed() {
-		$this->config->push( 'add_feed', true );
-		$this->init_cpt( true );
-
-		$qv_mock = array(
-			'feed'      => '',
-			'post_type' => '',
-		);
-		$qv      = $this->cpt->add_or_remove_to_from_rss_feed( $qv_mock );
-		
-		$this->assertTrue( in_array( 'foo', $qv['post_type'] ) );
-	}
-
-	function test_remove_from_feed() {
-		$qv_mock = array(
-			'feed'      => '',
-			'post_type' => get_post_types(),
-		);
-
-		$this->config->push( 'add_feed', false );
-		$this->init_cpt( true );
-
-		$qv                     = $this->cpt->add_or_remove_to_from_rss_feed( $qv_mock );
-		$this->assertFalse( in_array( 'foo', $qv['post_type'] ) );
 	}
 }

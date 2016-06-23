@@ -1,0 +1,1 @@
+<p class="<?php echo $this->atts['class']; ?>"><?php echo $this->content; ?></p>
