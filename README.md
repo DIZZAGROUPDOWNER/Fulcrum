@@ -2,10 +2,12 @@
 
 Fulcrum - The customization central repository to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.
 
-### Customization Central
+### The Why of Customization Central
 This plugin provides a central location for all redundant functionality.  It keeps your plugins and theme DRY, reusable, and modular.  It is meant to be extended.  Therefore, when you need a feature-specific plugin like a Portfolio, Testimonials, or FAQ, you extend the `Fulcrum\Addon\Addon` class in your plugin.  Then you configure what service providers you need.
 
-It saves you a ton of time and code in your plugins.
+Did you read that last part?  It's configuration over code, meaning you configure what you want! (Did you get a tingle?)
+
+Bottom Line: It saves you a ton of time and code in your plugins, which saves you moola.
 
 ### Features
 This plugin is fully crafted in OOP.  It utilizes [DI Container](http://pimple.sensiolabs.org/), Dependency Injection, Polymorphism, Inheritance, etc.  It shows you how to build OOP-capable plugins.
