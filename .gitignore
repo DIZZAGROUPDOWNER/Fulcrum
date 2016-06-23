@@ -1,0 +1,15 @@
+# Unit tests config
+phpunit.xml
+.travis.yml
+/bin
+tests/mocks/env/
+
+# Sass cache
+.sass-cache/
+
+# Development stuff
+/node_modules
+/config
+assets/sass
+assets/gulp
+.idea/
