@@ -2,7 +2,7 @@
 /**
  * Validate the runtime configuration
  *
- * @package     Fulcrum\Custom\Shortcode
+ * @package     Fulcrum\Custom\Post_Type
  * @since       1.1.1
  * @author      hellofromTonya
  * @link        https://knowthecode.io

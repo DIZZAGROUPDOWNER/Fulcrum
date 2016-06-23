@@ -13,5 +13,7 @@
 namespace Fulcrum\Custom\Taxonomy;
 
 return array(
-	'args' => array(),
+	'plural_name'   => '',
+	'singular_name' => '',
+	'args'          => array(),
 );

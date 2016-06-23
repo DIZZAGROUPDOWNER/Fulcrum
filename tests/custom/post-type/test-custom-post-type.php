@@ -2,13 +2,9 @@
 namespace Fulcrum\Tests\Custom\Post_Type;
 
 use Fulcrum\Custom\Post_Type\Post_Type_Supports;
-use Fulcrum\Custom\Post_Type\Validator;
 use WP_UnitTestCase;
-use Fulcrum\Tests\Mocks\Empty_Config;
 use Fulcrum\Config\Factory;
 use Fulcrum\Custom\Post_Type\Post_Type;
-
-include_once FULCRUM_MOCKS_DIR . 'mock-empty-config.php';
 
 class Post_Type_Test extends WP_UnitTestCase {
 

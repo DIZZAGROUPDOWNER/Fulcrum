@@ -38,15 +38,38 @@ class Taxonomy_Provider extends Provider {
 		$service_provider = array(
 			'autoload' => $config['autoload'],
 			'concrete' => function ( $container ) use ( $config ) {
+				$config_obj = $this->instantiate_config( $config );
+
+				if ( ! $this->is_taxonomy_config_valid( $config['taxonomy_name'], $config['object_type'], $config_obj ) ) {
+					return;
+				}
+
 				return new Taxonomy(
 					$config['taxonomy_name'],
 					$config['object_type'],
-					$this->instantiate_config( $config )
+					$config_obj
 				);
 			},
 		);
 
 		return $service_provider;
+	}
+
+	/**
+	 * Checks if the configuration is valid by running it through the validator.
+	 *
+	 * @since 1.1.1
+	 *
+	 * @param string $taxonomy_name Taxonomy name (all lowercase & no spaces)
+	 * @param string|array $object_type Name of the object type for the taxonomy object
+	 * @param Config_Contract $config Runtime configuration parameters
+	 *
+	 * @return bool
+	 */
+	protected function is_taxonomy_config_valid( $taxonomy_name, $object_type, Config_Contract $config ) {
+		$validator = new Validator();
+
+		return $validator->is_valid( $taxonomy_name, $object_type, $config );
 	}
 
 	/**

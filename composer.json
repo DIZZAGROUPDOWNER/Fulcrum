@@ -65,6 +65,7 @@
             "src/custom/taxonomy/class-taxonomy.php",
             "src/custom/taxonomy/class-taxonomy-provider.php",
             "src/custom/taxonomy/i-taxonomy-contract.php",
+            "src/custom/taxonomy/class-validator.php",
 
             "src/custom/template/class-template.php",
             "src/custom/template/class-template-provider.php",
