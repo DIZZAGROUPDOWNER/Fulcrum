@@ -4,7 +4,7 @@
  * Taxonomy Service Provider
  *
  * @package     Fulcrum\Custom\Taxonomy
- * @since       1.0.0
+ * @since       1.1.1
  * @author      hellofromTonya
  * @link        http://hellofromtonya.github.io/Fulcrum/
  * @license     GPL-2.0+
@@ -12,8 +12,8 @@
 
 namespace Fulcrum\Custom\Taxonomy;
 
+use Fulcrum\Config\Config_Contract;
 use Fulcrum\Foundation\Service_Provider\Provider;
-use Fulcrum\Config\Config;
 
 class Taxonomy_Provider extends Provider {
 
