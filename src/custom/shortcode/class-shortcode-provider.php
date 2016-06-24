@@ -3,8 +3,8 @@
 /**
  * Custom Post Type Service Provider
  *
- * @package     Fulcrum\Custom\Post_Type
- * @since       1.0.0
+ * @package     Fulcrum\Custom\Shortcode
+ * @since       1.1.1
  * @author      hellofromTonya
  * @link        http://hellofromtonya.github.io/Fulcrum/
  * @license     GPL-2.0+
@@ -45,7 +45,7 @@ class Shortcode_Provider extends Provider {
 	/**
 	 * Get the concrete based upon the configuration supplied.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.1
 	 *
 	 * @param array $config Runtime configuration parameters.
 	 * @param string $unique_id Container's unique key ID for this instance.
@@ -57,17 +57,34 @@ class Shortcode_Provider extends Provider {
 		$service_provider = array(
 			'autoload' => $config['autoload'],
 			'concrete' => function ( $container ) use ( $config ) {
+				$config_obj = $this->instantiate_config( $config );
+
+				if ( ! $this->is_shortcode_config_valid( $config_obj ) ) {
+					return;
+				}
 				
 				return new $config['classname'](
-					new Config(
-						$config['config'],
-						new Config_Validator()
-					)
+					$config_obj
 				);
 			},
 		);
 
 		return $service_provider;
+	}
+
+	/**
+	 * Checks if the configuration is valid by running it through the validator.
+	 *
+	 * @since 1.1.1
+	 *
+	 * @param $config
+	 *
+	 * @return bool
+	 */
+	protected function is_shortcode_config_valid( $config ) {
+		$validator = new Validator();
+
+		return $validator->is_config_valid( $config );
 	}
 
 	/**

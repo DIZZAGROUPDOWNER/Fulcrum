@@ -50,13 +50,8 @@ class Shortcode implements Shortcode_Contract {
 	 * @since 1.0.0
 	 *
 	 * @param Config_Contract $config Runtime configuration parameters.
-	 * @param Config_Validator Validator
 	 */
-	public function __construct( Config_Contract $config, Config_Validator $validator ) {
-		if ( ! $validator->is_config_valid( $config ) ) {
-			return;
-		}
-
+	public function __construct( Config_Contract $config ) {
 		$this->config = $config;
 
 		add_shortcode( $this->config->shortcode, array( $this, 'render_callback' ) );

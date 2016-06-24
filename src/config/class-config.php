@@ -19,6 +19,7 @@ namespace Fulcrum\Config;
 
 use ArrayObject;
 use InvalidArgumentException;
+use Mockery\CountValidator\Exception;
 use RuntimeException;
 use Fulcrum\Support\Helpers\Arr as Arr_Helpers;
 
@@ -246,6 +247,7 @@ class Config extends ArrayObject implements Config_Contract {
 	 * @throws RuntimeException
 	 */
 	public function is_file_valid( $file ) {
+
 		if ( ! $file ) {
 			throw new InvalidArgumentException( __( 'A config filename must not be empty.', 'fulcrum' ) );
 		}

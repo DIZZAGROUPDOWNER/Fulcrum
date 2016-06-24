@@ -2,13 +2,13 @@
 namespace Fulcrum\Tests\Custom\Shortcode;
 
 use Fulcrum\Config\Factory;
-use Fulcrum\Custom\Shortcode\Config_Validator;
+use Fulcrum\Custom\Shortcode\Validator;
 use WP_UnitTestCase;
 use Fulcrum\Tests\Mocks\Empty_Config;
 
 include_once FULCRUM_MOCKS_DIR . 'mock-empty-config.php';
 
-class Config_Validator_Test extends WP_UnitTestCase {
+class Validator_Test extends WP_UnitTestCase {
 
 	protected $config;
 	protected $defaults;
@@ -20,7 +20,7 @@ class Config_Validator_Test extends WP_UnitTestCase {
 		$this->config   = include( __DIR__ . '/config.php' );
 		$this->defaults = include( FULCRUM_PLUGIN_DIR . 'src/custom/shortcode/config/defaults.php' );
 
-		$this->validator = new Config_Validator();
+		$this->validator = new Validator();
 	}
 
 	function tearDown() {

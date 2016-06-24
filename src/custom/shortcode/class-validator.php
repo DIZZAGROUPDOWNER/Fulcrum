@@ -14,7 +14,7 @@ use Fulcrum\Config\Config_Contract;
 use InvalidArgumentException;
 use RuntimeException;
 
-class Config_Validator {
+class Validator {
 
 	/**
 	 * Runtime configuration parameters
