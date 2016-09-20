@@ -8,8 +8,8 @@
  * @package     Fulcrum\Custom\Post_Type
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Custom\Post_Type;
@@ -73,6 +73,17 @@ interface Post_Type_Contract {
 	 * @return mixed
 	 */
 	public function sort_columns_by( $vars );
+
+	/**
+	 * Handles adding (or removing) this CPT to/from the RSS Feed
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $query_vars Query variables from parse_request
+	 *
+	 * @return array    $query_vars
+	 */
+	public function add_or_remove_to_from_rss_feed( $query_vars );
 
 	/**
 	 * Get all of the supports

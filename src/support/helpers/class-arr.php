@@ -1,14 +1,14 @@
-<?php 
+<?php namespace Fulcrum\Support\Helpers;
 
-/**
- * Array Helpers - Static Collection of Helpers for Data Type Array
- *
- * @package     Fulcrum\Support\Helpers
- * @since       1.0.0
- * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+ and MIT License (MIT)
- */
+	/**
+	 * Array Helpers - Static Collection of Helpers for Data Type Array
+	 *
+	 * @package     Fulcrum\Support\Helpers
+	 * @since       1.0.0
+	 * @author      hellofromTonya
+	 * @link        https://knowthecode.io
+	 * @license     GNU General Public License 2.0+ and MIT License (MIT)
+	 */
 
 /**
  * This class has been adapted from the Laravel Illuminate framework, which
@@ -16,7 +16,6 @@
  * Changes reflect WordPress coding standard, compliance with PHP 5.3, +
  * additional functionality.
  */
-namespace Fulcrum\Support\Helpers;
 
 use Closure;
 
@@ -205,7 +204,7 @@ class Arr {
 			return true;
 		}
 
-		return ( false !== self::dot_notation_walk( $array, $key, 'callback_has' ) );
+		return false === self::dot_notation_walk( $array, $key, 'callback_has' ) ? false : true;
 	}
 
 	/**

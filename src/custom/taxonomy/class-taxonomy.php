@@ -8,8 +8,8 @@
  * @package     Fulcrum\Custom\Taxonomy
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Custom\Taxonomy;
@@ -60,17 +60,18 @@ class Taxonomy implements Taxonomy_Contract {
 	 * @param string|array $object_type Name of the object type for the taxonomy object
 	 * @param Config_Contract $config Runtime configuration parameters
 	 *
-	 * @return Taxonomy
+	 * @return self
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $taxonomy_name, $object_type, Config_Contract $config ) {
-		$this->taxonomy_name          = $taxonomy_name;
-		$this->object_type            = $object_type;
-		$this->config                 = $config;
-		$this->_are_labels_configured = $this->config->is_array( 'args' ) && $this->config->is_array( 'args.labels' );
+		$this->taxonomy_name = $taxonomy_name;
+		$this->object_type   = $object_type;
+		$this->config        = $config;
 
-		$this->init_events();
+		if ( $this->is_starting_state_valid() ) {
+			$this->init_events();
+		}
 	}
 
 	/**
@@ -165,8 +166,8 @@ class Taxonomy implements Taxonomy_Contract {
 			'new_item_name'              => sprintf( '%s %s', __( 'New', 'fulcrum' ), $this->config->singular_name ),
 			'parent_item'                => null,
 			'parent_item_colon'          => null,
-			'search_items'               => sprintf( '%s %s', __( 'Search', 'fulcrum' ), $this->config->plural_name ),
-			'popular_items'              => sprintf( '%s %s', __( 'Popular', 'fulcrum' ), $this->config->plural_name ),
+			'search_items'               => sprintf( '%s %s', __( 'Search', 'fulcrum' ),  $this->config->plural_name ),
+			'popular_items'              => sprintf( '%s %s', __( 'Popular', 'fulcrum' ),  $this->config->plural_name ),
 			'separate_items_with_commas' => null,
 			'add_or_remove_items'        => null,
 			'choose_from_most_used'      => null,
@@ -174,5 +175,41 @@ class Taxonomy implements Taxonomy_Contract {
 		);
 
 		return $this->_are_labels_configured ? wp_parse_args( $this->config->args['labels'], $default_labels ) : $default_labels;
+	}
+
+	/**
+	 * Checks if $config is valid
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 */
+	protected function is_configuration_valid() {
+		$this->_are_labels_configured = $this->config->is_array( 'args' ) && $this->config->is_array( 'args.labels' );
+
+		return true;
+	}
+
+	/**
+	 * Checks if the starting state is valid
+	 *
+	 * @since 1.0.0
+	 *
+	 * @throws InvalidArgumentException
+	 * @return bool
+	 */
+	protected function is_starting_state_valid() {
+
+		if ( ! $this->taxonomy_name ) {
+			throw new InvalidArgumentException( __( 'For Custom Taxonomy Configuration, the taxonomy name cannot be empty.', 'fulcrum' ) );
+		}
+
+		if ( ! $this->object_type || empty( $this->object_type ) ) {
+			throw new InvalidArgumentException( __( 'For Custom Taxonomy Configuration, the object_type in config cannot be empty.', 'fulcrum' ) );
+		}
+
+		$this->is_configuration_valid();
+
+		return true;
 	}
 }

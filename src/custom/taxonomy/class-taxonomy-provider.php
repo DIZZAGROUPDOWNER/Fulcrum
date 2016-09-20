@@ -4,16 +4,16 @@
  * Taxonomy Service Provider
  *
  * @package     Fulcrum\Custom\Taxonomy
- * @since       1.1.1
+ * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Custom\Taxonomy;
 
-use Fulcrum\Config\Config_Contract;
 use Fulcrum\Foundation\Service_Provider\Provider;
+use Fulcrum\Config\Config;
 
 class Taxonomy_Provider extends Provider {
 
@@ -38,38 +38,15 @@ class Taxonomy_Provider extends Provider {
 		$service_provider = array(
 			'autoload' => $config['autoload'],
 			'concrete' => function ( $container ) use ( $config ) {
-				$config_obj = $this->instantiate_config( $config );
-
-				if ( ! $this->is_taxonomy_config_valid( $config['taxonomy_name'], $config['object_type'], $config_obj ) ) {
-					return;
-				}
-
 				return new Taxonomy(
 					$config['taxonomy_name'],
 					$config['object_type'],
-					$config_obj
+					$this->instantiate_config( $config )
 				);
 			},
 		);
 
 		return $service_provider;
-	}
-
-	/**
-	 * Checks if the configuration is valid by running it through the validator.
-	 *
-	 * @since 1.1.1
-	 *
-	 * @param string $taxonomy_name Taxonomy name (all lowercase & no spaces)
-	 * @param string|array $object_type Name of the object type for the taxonomy object
-	 * @param Config_Contract $config Runtime configuration parameters
-	 *
-	 * @return bool
-	 */
-	protected function is_taxonomy_config_valid( $taxonomy_name, $object_type, Config_Contract $config ) {
-		$validator = new Validator();
-
-		return $validator->is_valid( $taxonomy_name, $object_type, $config );
 	}
 
 	/**

@@ -6,8 +6,8 @@
  * @package     Fulcrum
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+ and MIT Licence (MIT)
  */
 
 if ( ! function_exists( 'fulcrum_prevent_direct_file_access' ) ) {
@@ -73,16 +73,56 @@ if ( ! function_exists( 'fulcrum_get_post_id' ) ) {
 	 */
 	function fulcrum_get_post_id( $post_id = 0 ) {
 
-		global $post, $pagenow;
-
 		if ( is_admin() ) {
+			return fulcrum_get_post_id_when_in_backend( $post_id );
+		}
 
+		return $post_id < 1 ? get_the_ID() : $post_id;
+	}
+}
+
+if ( ! function_exists( 'fulcrum_get_post_id_when_in_backend' ) ) {
+	/**
+	 * Get the Post ID
+	 *
+	 * If in the back-end, it will use $_REQUEST;
+	 * else it uses either the incoming post ID or $post->ID
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id (optional)
+	 *
+	 * @return int                  Returns the post ID, if one is found; else 0.
+	 */
+	function fulcrum_get_post_id_when_in_backend( $post_id = 0 ) {
+
+		if ( ! is_admin() ) {
+			return $post_id;
+		}
+
+		$possible_request_keys = array(
+			'post_ID',
+			'post_id',
+			'post',
+		);
+
+		foreach( $possible_request_keys as $key ) {
+			if ( ! isset( $_REQUEST[ $key ] ) ) {
+				continue;
+			}
+
+			if ( is_numeric( $_REQUEST[ $key ] ) ) {
+				return (int) $_REQUEST[ $key ];
+			}
+		}
+
+		return $post_id;
+
+
+		global $pagenow;
 			return in_array( $pagenow, array( 'post.php', 'post-new.php' ) ) && isset( $_REQUEST['post'] )
 				? intval( $_REQUEST['post'] )
 				: $post_id;
-		}
-
-		return $post_id < 1 ? $post->ID : $post_id;
 	}
 }
 
@@ -304,4 +344,29 @@ if ( ! function_exists( 'fulcrum_add_grid_to_post_class' ) ) {
 
 		return $classes;
 	}
+}
+
+function fulcrum_sanitize_metadata( $metadata, $filter = '' ) {
+
+	if ( ! is_array( $metadata ) ) {
+		return fulcrum_sanitize_single_metadata( $metadata, $filter );
+	}
+
+	foreach ( $metadata as $key => $value ) {
+		$metadata[ $key ] = fulcrum_sanitize_single_metadata( $value, $filter[ $key ] );
+	}
+
+	return $metadata;
+}
+
+function fulcrum_sanitize_single_metadata( $value, $filter = '' ) {
+	if ( $filter ) {
+		return $filter( $value );
+	}
+
+	if ( is_numeric( $value ) ) {
+		return (int) $value;
+	}
+
+	return strip_tags( $value );
 }

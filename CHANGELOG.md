@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Metadata and metaboxes
+
 ## 1.1.1
 
 - Split out starting object validation into a Validator class

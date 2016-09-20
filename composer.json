@@ -1,6 +1,6 @@
 {
     "name" 			: "knowthecode/fulcrum",
-    "description" 	: "Fulcrum - The central custom repository for WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.",
+    "description" 	: "Fulcrum Plugin - The customization center to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.",
     "type"          : "project",
     "keywords" 		: ["wordpress", "wp", "plugin"],
     "homepage" 		: "https://knowthecode.io",
@@ -27,7 +27,6 @@
             "src/i-fulcrum-contract.php",
 
             "src/addon/class-addon.php",
-            "src/addon/class-theme.php",
 
             "src/asset/class-asset.php",
             "src/asset/class-asset-provider.php",
@@ -47,8 +46,6 @@
             "src/custom/meta/i-metabox-contract.php",
 
             "src/custom/post-type/class-post-type.php",
-            "src/custom/post-type/class-feed.php",
-            "src/custom/post-type/class-validator.php",
             "src/custom/post-type/class-post-type-supports.php",
             "src/custom/post-type/class-post-type-provider.php",
             "src/custom/post-type/i-post-type-contract.php",
@@ -58,14 +55,12 @@
             "src/custom/post-type/permalink/class-post-name-slug.php",
 
             "src/custom/shortcode/class-shortcode.php",
-            "src/custom/shortcode/class-validator.php",
             "src/custom/shortcode/class-shortcode-provider.php",
             "src/custom/shortcode/i-shortcode-contract.php",
 
             "src/custom/taxonomy/class-taxonomy.php",
             "src/custom/taxonomy/class-taxonomy-provider.php",
             "src/custom/taxonomy/i-taxonomy-contract.php",
-            "src/custom/taxonomy/class-validator.php",
 
             "src/custom/template/class-template.php",
             "src/custom/template/class-template-provider.php",
@@ -79,6 +74,9 @@
             "src/foundation/service-provider/class-handler.php",
             "src/foundation/service-provider/class-provider.php",
             "src/foundation/service-provider/i-provider-contract.php",
+
+            "src/metadata/class-metabox.php",
+            "src/metadata/i-metabox-contract.php",
 
             "src/security/class-login-form.php",
 
@@ -114,9 +112,7 @@
             "src/support/helpers/date-time-helpers.php",
             "src/support/helpers/helpers.php",
             "src/support/helpers/plugin-helpers.php",
-            "src/support/helpers/str-helpers.php",
-
-            "src/addon/helpers.php"
+            "src/support/helpers/str-helpers.php"
         ]
     },
     "autoload-dev" : {

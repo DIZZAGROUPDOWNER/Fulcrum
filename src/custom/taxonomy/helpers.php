@@ -6,8 +6,8 @@
  * @package     Fulcrum\Custom\Taxonomy
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+ and MIT Licence (MIT)
  */
 
 if ( ! function_exists( 'fulcrum_get_joined_list_of_terms' ) ) {

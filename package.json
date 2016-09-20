@@ -1,6 +1,6 @@
 {
   "name": "fulcrum",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Fulcrum - The central custom repository for WordPress.",
   "devDependencies": {}
 }

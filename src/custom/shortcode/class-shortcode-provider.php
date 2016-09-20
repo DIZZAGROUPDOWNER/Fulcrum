@@ -3,11 +3,11 @@
 /**
  * Custom Post Type Service Provider
  *
- * @package     Fulcrum\Custom\Shortcode
- * @since       1.1.1
+ * @package     Fulcrum\Custom\Post_Type
+ * @since       1.0.0
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Custom\Shortcode;
@@ -22,7 +22,7 @@ class Shortcode_Provider extends Provider {
 	 *
 	 * @var bool
 	 */
-	protected $has_defaults = true;
+	protected $has_defaults = false;
 
 	/**
 	 * Flag to indicate whether to skip the queue and register directly into the Container.
@@ -45,7 +45,7 @@ class Shortcode_Provider extends Provider {
 	/**
 	 * Get the concrete based upon the configuration supplied.
 	 *
-	 * @since 1.1.1
+	 * @since 1.0.0
 	 *
 	 * @param array $config Runtime configuration parameters.
 	 * @param string $unique_id Container's unique key ID for this instance.
@@ -57,34 +57,15 @@ class Shortcode_Provider extends Provider {
 		$service_provider = array(
 			'autoload' => $config['autoload'],
 			'concrete' => function ( $container ) use ( $config ) {
-				$config_obj = $this->instantiate_config( $config );
-
-				if ( ! $this->is_shortcode_config_valid( $config_obj ) ) {
-					return;
-				}
-				
 				return new $config['classname'](
-					$config_obj
+					new Config(
+						$config['config']
+					)
 				);
 			},
 		);
 
 		return $service_provider;
-	}
-
-	/**
-	 * Checks if the configuration is valid by running it through the validator.
-	 *
-	 * @since 1.1.1
-	 *
-	 * @param $config
-	 *
-	 * @return bool
-	 */
-	protected function is_shortcode_config_valid( $config ) {
-		$validator = new Validator();
-
-		return $validator->is_config_valid( $config );
 	}
 
 	/**

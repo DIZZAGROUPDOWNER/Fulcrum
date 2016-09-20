@@ -6,12 +6,14 @@
  * @package     Fulcrum\Custom\Shortcodes
  * @since       1.0.1
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Custom\Shortcode;
 
+use InvalidArgumentException;
+use RuntimeException;
 use Fulcrum\Config\Config_Contract;
 
 class Shortcode implements Shortcode_Contract {
@@ -22,13 +24,6 @@ class Shortcode implements Shortcode_Contract {
 	 * @var Config_Contract
 	 */
 	protected $config;
-
-	/**
-	 * No view is required flag
-	 *
-	 * @var bool
-	 */
-	protected $no_view_is_required = false;
 
 	/**
 	 * Shortcode attributes
@@ -54,7 +49,9 @@ class Shortcode implements Shortcode_Contract {
 	public function __construct( Config_Contract $config ) {
 		$this->config = $config;
 
-		add_shortcode( $this->config->shortcode, array( $this, 'render_callback' ) );
+		if ( $this->is_config_valid() ) {
+			add_shortcode( $this->config->shortcode, array( $this, 'render_callback' ) );
+		}
 	}
 
 	/**
@@ -89,33 +86,11 @@ class Shortcode implements Shortcode_Contract {
 	 * @return string Shortcode HTML
 	 */
 	protected function render() {
-		$content = $this->get_content();
 
 		ob_start();
 		include( $this->config->view );
 
 		return ob_get_clean();
-	}
-
-	/**
-	 * Get the content.  This method processes the content by passing it
-	 * through the shortcode function and escaping through a sanitizing filter.
-	 *
-	 * @since 1.1.1
-	 *
-	 * @return string
-	 */
-	protected function get_content() {
-		if ( ! $this->content ) {
-			return '';
-		}
-
-		$content = do_shortcode( $this->content );
-
-		$filter  = $this->config->content_filter;
-		$content = $filter( $content );
-
-		return $content;
 	}
 
 	/**
@@ -146,5 +121,40 @@ class Shortcode implements Shortcode_Contract {
 		}
 
 		return ' ' . esc_attr( $this->atts['class'] );
+	}
+
+	/**
+	 * Checks if the config is valid to start
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool
+	 * @throws InvalidArgumentException
+	 * @throws RuntimeException
+	 */
+	protected function is_config_valid() {
+		if ( ! $this->config->has( 'shortcode' ) ||
+		     ! $this->config->is_array( 'defaults' ) ||
+		     ! $this->config->has( 'view' )
+		) {
+			throw new InvalidArgumentException( __( 'Invalid config for shortcode.', 'fulcrum' ) );
+		}
+
+		if ( ! $this->is_no_view_required() && ! is_readable( $this->config->view ) ) {
+			throw new RuntimeException( sprintf( __( 'The specified view file [%s] is not readable.', 'fulcrum' ), $this->config->view ) );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks if a no view is required.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @return bool
+	 */
+	protected function is_no_view_required() {
+		return $this->config->has( 'no_view' ) && $this->config->no_view;
 	}
 }

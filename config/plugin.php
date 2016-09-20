@@ -5,8 +5,8 @@
  * @package     Fulcrum
  * @since       1.0.5
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum;
@@ -58,7 +58,7 @@ return array(
 	),
 
 	'admin_service_providers' => array(
-		'provider.metabox' => 'Fulcrum\Custom\Meta\Metabox_Provider',
+//		'provider.metabox' => 'Fulcrum\Custom\Meta\Metabox_Provider',
 		'provider.schema'  => 'Fulcrum\Database\Schema_Provider',
 	),
 

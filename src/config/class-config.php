@@ -9,17 +9,16 @@
  *          parameters.
  *
  * @package     Fulcrum\Config
- * @since       1.1.1
- * @author      hellofromTonya, Gary Jones, and Alain Schlesser
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @since       1.0.0
+ * @author      hellofromTonya
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum\Config;
 
 use ArrayObject;
 use InvalidArgumentException;
-use Mockery\CountValidator\Exception;
 use RuntimeException;
 use Fulcrum\Support\Helpers\Arr as Arr_Helpers;
 
@@ -124,7 +123,7 @@ class Config extends ArrayObject implements Config_Contract {
 	 * @return bool
 	 */
 	public function has( $parameter_key ) {
-		return Arr_Helpers::has( $this->config, $parameter_key, true );
+		return Arr_Helpers::has( $this->config, $parameter_key );
 	}
 
 	/**
@@ -157,9 +156,7 @@ class Config extends ArrayObject implements Config_Contract {
 	}
 
 	/**
-	 * Checks if the config is valid.
-	 *
-	 * FUTURE FEATURE
+	 * Valid the Config.
 	 *
 	 * @since 1.0.0
 	 *
@@ -171,19 +168,6 @@ class Config extends ArrayObject implements Config_Contract {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Set a configuration in via the key
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $parameter_key Key to be assigned, which also becomes the property
-	 * @param mixed $value Value to be assigned to the parameter key
-	 * @return null
-	 */
-	public function set( $parameter_key, $value ) {
-		$this->push( $parameter_key, $value );
 	}
 
 	/**
@@ -247,7 +231,6 @@ class Config extends ArrayObject implements Config_Contract {
 	 * @throws RuntimeException
 	 */
 	public function is_file_valid( $file ) {
-
 		if ( ! $file ) {
 			throw new InvalidArgumentException( __( 'A config filename must not be empty.', 'fulcrum' ) );
 		}

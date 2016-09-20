@@ -5,17 +5,17 @@
  * @package         Fulcrum
  * @author          hellofromTonya
  * @license         GPL-2.0+
- * @link            hhttp://hellofromtonya.github.io/Fulcrum/
+ * @link            https://knowthecode.io
  *
  * @wordpress-plugin
  * Plugin Name:     Fulcrum Plugin
- * Plugin URI:      http://hellofromtonya.github.io/Fulcrum/
+ * Plugin URI:      https://knowthecode.io
  * Description:     Fulcrum - The customization central repository to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.
- * Version:         1.1.1
+ * Version:         1.0.6
  * Author:          hellofromTonya
- * Author URI:      http://hellofromtonya.com
+ * Author URI:      https://knowthecode.io
  * Text Domain:     fulcrum
- * Requires WP:     3.5
+ * Requires WP:     4.5
  * Requires PHP:    5.4
  */
 
@@ -40,7 +40,7 @@ namespace Fulcrum;
 use Fulcrum\Config\Config;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit( 'Hey silly, no calling me directly. Doh.' );
+	exit( 'Cheatin&#8217; uh?' );
 }
 
 require_once( __DIR__ . '/assets/vendor/autoload.php' );

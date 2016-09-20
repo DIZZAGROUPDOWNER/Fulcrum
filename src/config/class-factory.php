@@ -5,9 +5,9 @@
  *
  * @package     Fulcrum\Config
  * @since       1.0.0
- * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @author      hellofromTonya, Alain Schlesser, Gary Jones
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 class Factory {

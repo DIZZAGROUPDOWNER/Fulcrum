@@ -4,10 +4,10 @@
  * Fulcrum - The central custom repository for WordPress.
  *
  * @package     Fulcrum
- * @since       1.1.1
+ * @since       1.0.5
  * @author      hellofromTonya
- * @link        http://hellofromtonya.github.io/Fulcrum/
- * @license     GPL-2.0+
+ * @link        https://knowthecode.io
+ * @license     GNU General Public License 2.0+
  */
 
 namespace Fulcrum;
@@ -24,7 +24,7 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.0.6';
 
 	/**
 	 * The plugin's minimum WordPress requirement
@@ -34,18 +34,18 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	const MIN_WP_VERSION = '3.5';
 
 	/**
-	 * Instance of Fulcrum
-	 *
-	 * @var Fulcrum_Contract
-	 */
-	public static $fulcrum;
-
-	/**
 	 * Configuration parameters
 	 *
 	 * @var Config_Contract
 	 */
 	protected $config;
+
+	/**
+	 * Instance of Fulcrum
+	 *
+	 * @var Fulcrum_Contract
+	 */
+	public static $fulcrum;
 
 	/*************************
 	 * Getters
@@ -76,7 +76,7 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	 */
 	public function __construct( Config_Contract $config ) {
 		$this->config = $config;
-		parent::__construct( $this->config->initial_parameters );
+		parent::__construct();
 
 		$this['fulcrum']                         = self::$fulcrum = $this;
 		$this['is_flush_rewrite_rules_required'] = false;
