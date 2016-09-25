@@ -4,9 +4,9 @@
  * Fulcrum - The central custom repository for WordPress.
  *
  * @package     Fulcrum
- * @since       1.0.5
+ * @since       1.1.2
  * @author      hellofromTonya
- * @link        https://knowthecode.io
+ * @link        https://UpTechLabs.io
  * @license     GNU General Public License 2.0+
  */
 
@@ -24,14 +24,14 @@ class Fulcrum extends Container implements Fulcrum_Contract {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.6';
+	const VERSION = '1.1.2';
 
 	/**
 	 * The plugin's minimum WordPress requirement
 	 *
 	 * @var string
 	 */
-	const MIN_WP_VERSION = '3.5';
+	const MIN_WP_VERSION = '4.5';
 
 	/**
 	 * Configuration parameters

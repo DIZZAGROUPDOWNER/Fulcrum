@@ -3,7 +3,7 @@
     "description" 	: "Fulcrum Plugin - The customization center to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.",
     "type"          : "project",
     "keywords" 		: ["wordpress", "wp", "plugin"],
-    "homepage" 		: "https://knowthecode.io",
+    "homepage" 		: "https://UpTechLabs.io",
     "license" 		: "GPL-2.0+",
     "authors": [
         {
@@ -112,6 +112,7 @@
             "src/support/helpers/date-time-helpers.php",
             "src/support/helpers/helpers.php",
             "src/support/helpers/plugin-helpers.php",
+            "src/support/helpers/parent-child-helpers.php",
             "src/support/helpers/str-helpers.php"
         ]
     },

@@ -5,15 +5,15 @@
  * @package         Fulcrum
  * @author          hellofromTonya
  * @license         GPL-2.0+
- * @link            https://knowthecode.io
+ * @link            https://UpTechLabs.io
  *
  * @wordpress-plugin
  * Plugin Name:     Fulcrum Plugin
- * Plugin URI:      https://knowthecode.io
+ * Plugin URI:      https://github.com/hellofromtonya/Fulcrum
  * Description:     Fulcrum - The customization central repository to extend and custom WordPress. This plugin provides the centralized infrastructure for the custom plugins and theme.
- * Version:         1.0.6
+ * Version:         1.1.2
  * Author:          hellofromTonya
- * Author URI:      https://knowthecode.io
+ * Author URI:      https://UpTechLabs.io
  * Text Domain:     fulcrum
  * Requires WP:     4.5
  * Requires PHP:    5.4

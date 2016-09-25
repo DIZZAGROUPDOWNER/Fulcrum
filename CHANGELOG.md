@@ -1,6 +1,7 @@
 ## 1.1.2
 
 - Metadata and metaboxes
+- Parent/Child helpers
 
 ## 1.1.1
 

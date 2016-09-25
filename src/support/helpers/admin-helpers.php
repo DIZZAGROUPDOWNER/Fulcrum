@@ -6,7 +6,7 @@
  * @package     Fulcrum\Support\Helpers
  * @since       1.1.1
  * @author      hellofromTonya
- * @link        https://knowthecode.io
+ * @link        https://UpTechLabs.io
  * @license     GNU General Public License 2.0+
  */
 

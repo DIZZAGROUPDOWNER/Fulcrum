@@ -8,7 +8,7 @@
  * @package     Fulcrum\Addon
  * @since       1.0.2
  * @author      hellofromTonya
- * @link        https://knowthecode.io
+ * @link        https://UpTechLabs.io
  * @license     GNU General Public License 2.0+
  */
 

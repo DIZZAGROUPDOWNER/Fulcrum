@@ -6,8 +6,8 @@
  * @package     Fulcrum
  * @since       1.0.0
  * @author      hellofromTonya
- * @link        https://knowthecode.io
- * @license     GNU General Public License 2.0+ and MIT Licence (MIT)
+ * @link        https://UpTechLabs.io
+ * @license     GNU General Public License 2.0+
  */
 
 if ( ! function_exists( 'fulcrum_prevent_direct_file_access' ) ) {
