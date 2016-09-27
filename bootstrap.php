@@ -47,10 +47,6 @@ require_once( __DIR__ . '/assets/vendor/autoload.php' );
 
 fulcrum_declare_plugin_constants( 'FULCRUM', __FILE__ );
 
-if ( version_compare( $GLOBALS['wp_version'], Fulcrum::MIN_WP_VERSION, '>' ) ) {
-	launch();
-}
-
 /**
  * Launch the plugin
  *
@@ -59,10 +55,34 @@ if ( version_compare( $GLOBALS['wp_version'], Fulcrum::MIN_WP_VERSION, '>' ) ) {
  * @return void
  */
 function launch() {
-
 	$config = __DIR__ . '/config/plugin.php';
 
-	new Fulcrum(
+	return new Fulcrum(
 		new Config( $config )
 	);
+}
+
+add_filter( 'pre_update_option_rewrite_rules', __NAMESPACE__ . '\init_plugin_rewrites_and_flush', 1 );
+/**
+ * If a flush_rewrite_rules is in process, we run our rewrite event
+ * to ensure the rewrite rules and tasks are included.
+ *
+ * Why not use the activation/deactivation process?  There are far too
+ * many places in WordPress where flush_rewrite_rules() is triggered.
+ * When that happens, it may not include our rewrite rules because of the
+ * way we are adding them. To account for all possible scenarios (like
+ * saving permalinks, upgrade, and plugin management), we are registered
+ * to the actual flush_rewrite_rules mechanism.
+ *
+ * @since 1.0.0
+ *
+ * @param mixed $value Rewrite rules value
+ *
+ * @return mixed
+ */
+function init_plugin_rewrites_and_flush( $value) {
+	if ( ! $value ) {
+		do_action( 'fulcrum_init_rewrites' );
+	}
+	return $value;
 }
